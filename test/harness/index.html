@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BidVerdict harness</title>
+  <base href="/extension/">
+  <link rel="stylesheet" href="sidepanel.css">
+  <style>
+    body.framed { max-width: 420px; margin: 0 auto; border-inline: 1px solid var(--line); min-height: 100vh; }
+  </style>
+</head>
+<body class="framed">
+  <div id="app"></div>
+  <!-- Fake chrome.* APIs and SAM.gov responses so the real side panel code runs in a normal tab -->
+  <script src="/test/harness/chrome-mock.js"></script>
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

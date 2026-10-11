@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BidVerdict store screenshot</title>
+<style>
+  /* 1280x800 Chrome Web Store screenshot: message on the left, the real side panel on the right. */
+  :root { --navy: #13294B; --ink: #0F1B2D; --paper: #F5F6F8; --line: #DCE1E8; --go: #22C55E; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1280px; height: 800px; overflow: hidden; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  body { display: grid; grid-template-columns: 1fr 520px; background: var(--paper); }
+  .copy { background: var(--navy); color: #fff; padding: 84px 64px; display: flex; flex-direction: column; gap: 22px; position: relative; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 22px; letter-spacing: -.01em; }
+  .brand img { width: 40px; height: 40px; }
+  h1 { font-size: 50px; line-height: 1.06; margin: 18px 0 0; letter-spacing: -.025em; max-width: 13ch; }
+  p { font-size: 21px; line-height: 1.5; margin: 0; color: #C9D4E6; max-width: 34ch; }
+  ul { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 12px; }
+  li { font-size: 18px; color: #E6ECF5; display: flex; gap: 12px; align-items: flex-start; }
+  li::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--go); margin-top: 8px; }
+  .foot { position: absolute; left: 64px; bottom: 44px; font-size: 13px; color: #8FA0BC; }
+  .stage { display: grid; place-items: center; background: linear-gradient(#EEF1F5, #E4E8EE); }
+  .panel { width: 420px; height: 728px; background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(15, 27, 45, .22); }
+  iframe { width: 420px; height: 728px; border: 0; display: block; }
+</style>
+</head>
+<body>
+  <section class="copy">
+    <div class="brand"><img src="/extension/icons/icon128.png" alt="">BidVerdict</div>
+    <h1 id="h"></h1>
+    <p id="p"></p>
+    <ul id="ul"></ul>
+    <div class="foot">Works on SAM.gov contract opportunities. Not affiliated with GSA or SAM.gov.</div>
+  </section>
+  <section class="stage"><div class="panel"><iframe id="f" title="BidVerdict side panel"></iframe></div></section>
+  <script src="shot.js"></script>
+</body>
+</html>

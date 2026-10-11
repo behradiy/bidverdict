@@ -1,0 +1,88 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "skipped": [],
+ "checks": {
+  "noticeType": {
+   "code": "o",
+   "label": "Solicitation",
+   "biddable": true
+  },
+  "setAside": {
+   "code": "SDVOSBC",
+   "label": "SDVOSB Set-Aside (FAR 19.14)",
+   "eligible": false,
+   "soleSource": false,
+   "needs": [
+    "Service-disabled veteran-owned (SDVOSB)"
+   ],
+   "note": null
+  },
+  "deadline": {
+   "iso": "2026-10-20T15:00:00-06:00",
+   "tz": "America/Denver",
+   "daysLeft": 9.2,
+   "passed": false
+  },
+  "naics": {
+   "codes": [
+    "561730"
+   ],
+   "match": "related",
+   "matched": [
+    "561730"
+   ]
+  },
+  "place": {
+   "state": "NM",
+   "match": true
+  },
+  "hardStop": {
+   "verdict": "No-bid",
+   "reason": "Set aside for Service-disabled veteran-owned (SDVOSB) firms, and your profile doesn’t list that certification."
+  }
+ },
+ "result": {
+  "verdict": "No-bid",
+  "score": 12,
+  "verdictReason": "Set aside for Service-disabled veteran-owned (SDVOSB) firms, and your profile doesn’t list that certification.",
+  "summary": "The Albuquerque VA Medical Center wants grounds maintenance and snow removal for a base year plus four option years. Only SDVOSB firms can be awarded this contract.",
+  "matches": [
+   "Albuquerque is inside your service area",
+   "Related NAICS: you hold 561720, this is 561730"
+  ],
+  "gaps": [
+   "SDVOSB certification required",
+   "Grounds maintenance and snow removal aren’t in your listed capabilities"
+  ],
+  "keyFacts": [
+   {
+    "label": "Contract type",
+    "value": "Firm-fixed-price"
+   },
+   {
+    "label": "Period of performance",
+    "value": "Base year plus four option years"
+   },
+   {
+    "label": "Estimated value",
+    "value": "Not stated"
+   }
+  ],
+  "requirements": [
+   {
+    "item": "Verified SDVOSB status in SBA’s certification system",
+    "source": "36C26226Q0877 Solicitation"
+   }
+  ],
+  "evaluation": [
+   "Lowest price technically acceptable"
+  ],
+  "redFlags": [
+   "You are not eligible for this set-aside"
+  ],
+  "questions": [],
+  "documentsRead": [
+   "36C26226Q0877 Solicitation.pdf"
+  ]
+ }
+}

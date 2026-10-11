@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BidVerdict promo tile</title>
+<style>
+  /* ?size=small (440x280) or ?size=marquee (1400x560) */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; overflow: hidden; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  body { background: #13294B; color: #fff; display: flex; align-items: center; }
+  .wrap { display: flex; align-items: center; gap: 22px; padding: 0 34px; }
+  img { width: 92px; height: 92px; flex: none; }
+  .name { font-weight: 800; font-size: 34px; letter-spacing: -.02em; }
+  .tag { font-size: 17px; color: #C9D4E6; margin-top: 6px; line-height: 1.35; }
+  .chips { display: flex; gap: 8px; margin-top: 14px; }
+  .chip { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+  .go { background: #22C55E; color: #06210F; } .warn { background: #FBBF24; color: #2B1B00; } .stop { background: #F87171; color: #2B0606; }
+  body.marquee .wrap { gap: 44px; padding: 0 110px; }
+  body.marquee img { width: 190px; height: 190px; }
+  body.marquee .name { font-size: 72px; }
+  body.marquee .tag { font-size: 30px; max-width: 26ch; }
+  body.marquee .chip { font-size: 20px; padding: 6px 16px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img src="/extension/icons/icon128.png" alt="">
+    <div>
+      <div class="name">BidVerdict</div>
+      <div class="tag">Bid or no-bid on SAM.gov opportunities, in about a minute.</div>
+      <div class="chips"><span class="chip go">Bid</span><span class="chip warn">Consider</span><span class="chip stop">No-bid</span></div>
+    </div>
+  </div>
+  <script>
+    const size = new URLSearchParams(location.search).get('size');
+    if (size === 'marquee') { document.body.classList.add('marquee'); document.body.style.width = '1400px'; document.body.style.height = '560px'; }
+    else { document.body.style.width = '440px'; document.body.style.height = '280px'; }
+  </script>
+</body>
+</html>

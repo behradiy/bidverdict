@@ -1,0 +1,135 @@
+{
+ "model": "gemini-3.8-flash",
+ "skipped": [],
+ "checks": {
+  "noticeType": {
+   "code": "k",
+   "label": "Combined Synopsis/Solicitation",
+   "biddable": true
+  },
+  "setAside": {
+   "code": "SBA",
+   "label": "Total Small Business Set-Aside (FAR 19.5)",
+   "eligible": true,
+   "soleSource": false,
+   "needs": [
+    "Small business"
+   ],
+   "note": null
+  },
+  "deadline": {
+   "iso": "2026-10-28T17:00:00-07:00",
+   "tz": "America/Phoenix",
+   "daysLeft": 16.3,
+   "passed": false
+  },
+  "naics": {
+   "codes": [
+    "561720"
+   ],
+   "match": "exact",
+   "matched": [
+    "561720"
+   ]
+  },
+  "place": {
+   "state": "AZ",
+   "match": true
+  },
+  "hardStop": null
+ },
+ "result": {
+  "verdict": "Bid",
+  "score": 82,
+  "verdictReason": "You’re eligible, the NAICS code matches exactly, and the work is in your home state with over two weeks to respond.",
+  "summary": "The Phoenix VA Health Care System is buying custodial services for its main campus and two community clinics. It is a firm-fixed-price contract with a base year and four option years, set aside for small businesses.",
+  "matches": [
+   "Exact NAICS match: 561720 Janitorial Services",
+   "Small business set-aside, and you are a small business",
+   "Work is in Phoenix, inside your service area",
+   "Healthcare facility experience from your hospital network contract"
+  ],
+  "gaps": [
+   "No VA prime contract yet; your VA subcontract is relevant past performance",
+   "Every cleaner needs 12 hours of infection-control training before start"
+  ],
+  "keyFacts": [
+   {
+    "label": "Contract type",
+    "value": "Firm-fixed-price"
+   },
+   {
+    "label": "Period of performance",
+    "value": "Base year plus four option years"
+   },
+   {
+    "label": "Estimated value",
+    "value": "Not stated"
+   },
+   {
+    "label": "Incumbent",
+    "value": "Not stated"
+   },
+   {
+    "label": "Questions due",
+    "value": "7 days before the response date, by email"
+   },
+   {
+    "label": "Site visit",
+    "value": "Optional; arrange through the contracting officer"
+   },
+   {
+    "label": "Wage determination",
+    "value": "WD 2015-5465 Rev 27 applies"
+   },
+   {
+    "label": "Evaluation basis",
+    "value": "Best value; technical and past performance outweigh price"
+   }
+  ],
+  "requirements": [
+   {
+    "item": "Signed SF 1449 with every amendment acknowledged",
+    "source": "Combined Synopsis Solicitation"
+   },
+   {
+    "item": "Technical approach, 10 pages maximum, covering staffing and quality control",
+    "source": "Combined Synopsis Solicitation"
+   },
+   {
+    "item": "Three past performance references from the last five years",
+    "source": "Combined Synopsis Solicitation"
+   },
+   {
+    "item": "Prices for every line item, base and option years",
+    "source": "Attachment B - Price Schedule"
+   },
+   {
+    "item": "Quality control plan that meets the inspection standards",
+    "source": "Attachment A - Performance Work Statement"
+   },
+   {
+    "item": "Active SAM registration that includes NAICS 561720",
+    "source": "Combined Synopsis Solicitation"
+   }
+  ],
+  "evaluation": [
+   "Technical approach and staffing plan",
+   "Past performance",
+   "Price"
+  ],
+  "redFlags": [
+   "The price schedule is a spreadsheet BidVerdict can’t read yet; review it yourself"
+  ],
+  "questions": [
+   "Is there an incumbent contractor, and how many full-time staff work on site today?",
+   "Will the government provide supplies and on-site storage for equipment?",
+   "Does commercial hospital experience count as relevant past performance?"
+  ],
+  "documentsRead": [
+   "36C26226Q0918 Combined Synopsis Solicitation.pdf",
+   "Attachment A - Performance Work Statement.pdf",
+   "Wage Determination 2015-5465 Rev 27.pdf"
+  ]
+ }
+}

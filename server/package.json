@@ -1,0 +1,22 @@
+{
+  "name": "bidverdict-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend for the BidVerdict Chrome extension: bid/no-bid analysis of SAM.gov notices with Gemini.",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "PORT=${PORT:-8787} MOCK_AI=1 STORE=memory DEV_ALLOW_ANY_ORIGIN=1 node --watch src/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "9.2.0",
+    "@google/genai": "2.24.0",
+    "express": "5.2.1",
+    "mammoth": "1.13.0"
+  }
+}

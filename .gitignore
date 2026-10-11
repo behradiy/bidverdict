@@ -1,0 +1,14 @@
+# dependencies and build output
+node_modules/
+dist/
+*.zip
+
+# local-only notes and settings (deployment details, filled-in listing)
+*.local.md
+.env
+.env.*
+.claude/
+
+# logs and OS files
+*.log
+.DS_Store
