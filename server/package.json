@@ -2,7 +2,7 @@
   "name": "bidverdict-api",
   "version": "1.0.0",
   "private": true,
-  "description": "Backend for the BidVerdict Chrome extension: bid/no-bid analysis of SAM.gov notices with Gemini.",
+  "description": "Backend for the GovVerdict Chrome extension: bid/no-bid analysis of SAM.gov notices with Gemini.",
   "type": "module",
   "main": "src/index.js",
   "engines": {

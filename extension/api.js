@@ -11,7 +11,7 @@ async function call(path, {method = 'GET', body, timeoutMs = 20000} = {}) {
   try {
     r = await fetch(API_BASE + path, {method, headers: body ? {'content-type': 'application/json'} : {}, body: body ? JSON.stringify(body) : undefined, signal: ctrl.signal});
   } catch (e) {
-    throw new ApiError(e.name === 'AbortError' ? 'The analysis took too long. Try again with fewer attachments.' : 'Can’t reach BidVerdict. Check your connection and try again.', 0);
+    throw new ApiError(e.name === 'AbortError' ? 'The analysis took too long. Try again with fewer attachments.' : 'Can’t reach GovVerdict. Check your connection and try again.', 0);
   } finally {
     clearTimeout(timer);
   }

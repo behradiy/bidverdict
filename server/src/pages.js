@@ -5,8 +5,8 @@ export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;',
 
 export function cfg() {
   return {
-    name: 'BidVerdict',
-    operator: process.env.OPERATOR_NAME || 'The BidVerdict team',
+    name: 'GovVerdict',
+    operator: process.env.OPERATOR_NAME || 'The GovVerdict team',
     email: process.env.SUPPORT_EMAIL || 'support@example.com',
     store: process.env.CHROME_STORE_URL || '',
     price: process.env.PRO_PRICE_LABEL || '$14 a month',
@@ -46,11 +46,11 @@ function page(title, body) {
 
 export function privacyPage() {
   const c = cfg();
-  return page('BidVerdict privacy policy', `
+  return page('GovVerdict privacy policy', `
 <span class="tag">Effective 11 October 2026</span>
 <h1>Privacy policy</h1>
-<p class="lede">BidVerdict helps you decide whether to bid on U.S. federal contract opportunities. This policy explains what the extension and its server collect, why, and for how long.</p>
-<p>BidVerdict is operated by ${esc(c.operator)}. Contact: <a href="mailto:${esc(c.email)}">${esc(c.email)}</a>.</p>
+<p class="lede">GovVerdict helps you decide whether to bid on U.S. federal contract opportunities. This policy explains what the extension and its server collect, why, and for how long.</p>
+<p>GovVerdict is operated by ${esc(c.operator)}. Contact: <a href="mailto:${esc(c.email)}">${esc(c.email)}</a>.</p>
 
 <h2>Data we collect</h2>
 <p>These are the same categories declared in our Chrome Web Store listing.</p>
@@ -72,7 +72,7 @@ export function privacyPage() {
 </ul>
 
 <h2>When the extension reads pages</h2>
-<p>BidVerdict only reads from sam.gov and SAM.gov’s public attachment storage, and only when you open the side panel on a contract opportunity. It does not read or record any other website.</p>
+<p>GovVerdict only reads from sam.gov and SAM.gov’s public attachment storage, and only when you open the side panel on a contract opportunity. It does not read or record any other website.</p>
 
 <h2>Who processes your data</h2>
 <ul>
@@ -82,7 +82,7 @@ export function privacyPage() {
 <p>We don’t sell or rent your data, and we don’t share it with anyone else.</p>
 
 <h2>Limited Use</h2>
-<p>The use of information received from Chrome APIs adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements. We don’t use or transfer your data for purposes unrelated to BidVerdict’s single purpose of analysing contract opportunities for bid/no-bid decisions, we don’t use it for advertising, and we don’t use it to determine creditworthiness or for lending.</p>
+<p>The use of information received from Chrome APIs adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements. We don’t use or transfer your data for purposes unrelated to GovVerdict’s single purpose of analysing contract opportunities for bid/no-bid decisions, we don’t use it for advertising, and we don’t use it to determine creditworthiness or for lending.</p>
 
 <h2>Your choices</h2>
 <ul>
@@ -96,10 +96,10 @@ export function privacyPage() {
 
 export function supportPage() {
   const c = cfg();
-  const subject = encodeURIComponent('BidVerdict support');
-  return page('BidVerdict support', `
+  const subject = encodeURIComponent('GovVerdict support');
+  return page('GovVerdict support', `
 <span class="tag">Support</span>
-<h1>Get help with BidVerdict</h1>
+<h1>Get help with GovVerdict</h1>
 <p class="lede">Email us and a real person replies, usually within one business day.</p>
 <div class="card" style="margin-top:18px">
   <b>Email</b>
@@ -110,13 +110,13 @@ export function supportPage() {
 
 <h2>Common questions</h2>
 <h3>The panel says “Open a contract opportunity”.</h3>
-<p>BidVerdict works on contract opportunity pages, the ones whose address looks like <span class="muted">sam.gov/opp/…/view</span>. Open one from SAM.gov search and click the BidVerdict icon.</p>
+<p>GovVerdict works on contract opportunity pages, the ones whose address looks like <span class="muted">sam.gov/opp/…/view</span>. Open one from SAM.gov search and click the GovVerdict icon.</p>
 <h3>An attachment wasn’t read.</h3>
-<p>BidVerdict reads PDF and Word files up to 7 MB each, 12 MB in total. Spreadsheets aren’t read yet: open them yourself, or paste the relevant part into “Add text from elsewhere”.</p>
+<p>GovVerdict reads PDF and Word files up to 7 MB each, 12 MB in total. Spreadsheets aren’t read yet: open them yourself, or paste the relevant part into “Add text from elsewhere”.</p>
 <h3>I hit the daily limit.</h3>
 <p>The free plan includes ${esc(c.freeLimit)} analyses a day. It resets at midnight UTC. Analyses that fail don’t count.</p>
 <h3>The verdict looks wrong.</h3>
-<p>Check your Profile tab first: NAICS codes, certifications and states drive the eligibility checks. If it still looks wrong, email us the notice link. BidVerdict gives decision support; always confirm against the solicitation.</p>
+<p>Check your Profile tab first: NAICS codes, certifications and states drive the eligibility checks. If it still looks wrong, email us the notice link. GovVerdict gives decision support; always confirm against the solicitation.</p>
 <h3>How do I delete my data?</h3>
 <p>Your company profile lives in your browser; use “Clear profile” or remove the extension. For licence and payment records, email us from the address you paid with. See the <a href="/privacy">privacy policy</a>.</p>`);
 }
@@ -124,14 +124,14 @@ export function supportPage() {
 export function thanksPage({key, error, pending}) {
   if (!key) {
     const refresh = pending ? '<script>setTimeout(function () { location.reload(); }, 6000);</script>' : '';
-    return page('BidVerdict Pro', `${refresh}<h1>${pending ? 'Confirming your payment…' : 'Something’s missing'}</h1>
+    return page('GovVerdict Pro', `${refresh}<h1>${pending ? 'Confirming your payment…' : 'Something’s missing'}</h1>
 <p class="lede">${esc(error || (pending ? 'This usually takes a few seconds. This page refreshes on its own.' : 'We couldn’t confirm your payment.'))}</p>
 <p>If it doesn’t resolve within a few minutes, email us with the receipt Paddle sent you and we’ll sort it out.</p>`);
   }
-  return page('BidVerdict Pro is active', `
+  return page('GovVerdict Pro is active', `
 <span class="tag">Payment received</span>
 <h1>You’re on Pro.</h1>
-<p class="lede">Pro is already active in the browser you upgraded from. Close this tab and click <b>Refresh</b> in the BidVerdict Account tab.</p>
+<p class="lede">Pro is already active in the browser you upgraded from. Close this tab and click <b>Refresh</b> in the GovVerdict Account tab.</p>
 <p>Save this licence key. Paste it into the Account tab to use Pro in up to three browsers, or after reinstalling:</p>
 <div class="key">${esc(key)}</div>
 <p class="muted small">Paddle, our reseller, emailed you a receipt. You can cancel or update your subscription at any time from the link in that email.</p>`);
@@ -140,8 +140,8 @@ export function thanksPage({key, error, pending}) {
 export function checkoutPage({installId, clientToken, priceId, sandbox}) {
   const c = cfg();
   const cfgJson = JSON.stringify({installId, clientToken, priceId, sandbox}).replace(/</g, '\\u003c');
-  return page('Upgrade to BidVerdict Pro', `
-<span class="tag">BidVerdict Pro${sandbox ? ' · test mode' : ''}</span>
+  return page('Upgrade to GovVerdict Pro', `
+<span class="tag">GovVerdict Pro${sandbox ? ' · test mode' : ''}</span>
 <h1>Upgrade to Pro</h1>
 <p class="lede">${esc(c.price)}: up to ${esc(c.proLimit)} analyses a day and the deeper model. Cancel any time.</p>
 <p>Checkout is handled by Paddle, our reseller and merchant of record. It works out sales tax or VAT for your country.</p>
@@ -176,14 +176,14 @@ export function checkoutPage({installId, clientToken, priceId, sandbox}) {
 
 export function termsPage() {
   const c = cfg();
-  return page('BidVerdict terms of service', `
+  return page('GovVerdict terms of service', `
 <span class="tag">Effective 11 October 2026</span>
 <h1>Terms of service</h1>
-<p class="lede">These terms cover your use of the BidVerdict Chrome extension and website, operated by ${esc(c.operator)}.</p>
+<p class="lede">These terms cover your use of the GovVerdict Chrome extension and website, operated by ${esc(c.operator)}.</p>
 
 <h2>The service</h2>
-<p>BidVerdict analyses U.S. federal contract opportunities published on SAM.gov against the company profile you enter, and gives a bid/no-bid recommendation. It is decision support. It is not legal, contracting or financial advice, and it doesn’t guarantee eligibility or an award. Always confirm requirements in the solicitation itself and with the contracting officer.</p>
-<p>BidVerdict is independent and is not affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency.</p>
+<p>GovVerdict analyses U.S. federal contract opportunities published on SAM.gov against the company profile you enter, and gives a bid/no-bid recommendation. It is decision support. It is not legal, contracting or financial advice, and it doesn’t guarantee eligibility or an award. Always confirm requirements in the solicitation itself and with the contracting officer.</p>
+<p>GovVerdict is independent and is not affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency.</p>
 
 <h2>Plans</h2>
 <ul>
@@ -200,12 +200,12 @@ export function termsPage() {
 <ul>
 <li>Don’t share licence keys beyond your own three browsers, resell access, or try to get around usage limits.</li>
 <li>Don’t use automated scripts to call our service, or try to probe, overload or reverse-engineer it.</li>
-<li>Use BidVerdict only on notices and documents you’re entitled to access.</li>
+<li>Use GovVerdict only on notices and documents you’re entitled to access.</li>
 </ul>
 <p>We may suspend access that breaks these rules.</p>
 
 <h2>Disclaimer and liability</h2>
-<p>BidVerdict is provided “as is”. Analyses are produced by AI from public documents and can be wrong or incomplete. To the extent the law allows, we aren’t liable for indirect or consequential losses, including lost contracts or profits, and our total liability is limited to the amount you paid us in the 12 months before the claim.</p>
+<p>GovVerdict is provided “as is”. Analyses are produced by AI from public documents and can be wrong or incomplete. To the extent the law allows, we aren’t liable for indirect or consequential losses, including lost contracts or profits, and our total liability is limited to the amount you paid us in the 12 months before the claim.</p>
 
 <h2>Changes and contact</h2>
 <p>We may update these terms and will change the date above when we do. Questions: <a href="mailto:${esc(c.email)}">${esc(c.email)}</a>.</p>`);
@@ -213,10 +213,10 @@ export function termsPage() {
 
 export function refundsPage() {
   const c = cfg();
-  return page('BidVerdict refund policy', `
+  return page('GovVerdict refund policy', `
 <span class="tag">Effective 11 October 2026</span>
 <h1>Refund policy</h1>
-<p class="lede">If BidVerdict Pro isn’t right for you, ask within 14 days of a payment and you’ll get that payment back in full.</p>
+<p class="lede">If GovVerdict Pro isn’t right for you, ask within 14 days of a payment and you’ll get that payment back in full.</p>
 <ul>
 <li>This applies to your first payment and to any monthly renewal, as long as you ask within 14 days of that payment.</li>
 <li>Refunds go back to your original payment method. They are processed by Paddle, our reseller and merchant of record, and usually arrive within 5–10 business days.</li>

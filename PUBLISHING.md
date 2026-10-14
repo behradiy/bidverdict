@@ -1,4 +1,4 @@
-# Publishing BidVerdict tonight
+# Publishing GovVerdict tonight
 
 Everything in this folder is built and tested. What's left needs your accounts and payment details, so you do these steps. Plan on about 1.5 hours of hands-on time, then the Chrome Web Store review, which you don't control (see step 7).
 
@@ -15,7 +15,7 @@ bidverdict/
 
 ## 1. Make a separate Google Cloud project (10 min)
 
-Your gcloud login can reach several **work** projects. Keep BidVerdict out of them: give it its own project and, ideally, its own gcloud configuration.
+Your gcloud login can reach several **work** projects. Keep GovVerdict out of them: give it its own project and, ideally, its own gcloud configuration.
 
 ```bash
 gcloud config configurations create bidverdict
@@ -39,7 +39,7 @@ CREATE_PROJECT=1 BILLING_ACCOUNT=01ABCD-23EF45-6789AB BUDGET_USD=50 PROJECT_ID=b
 
 It creates the project, links billing, enables the APIs, and creates Firestore with an auto-expiry rule for usage counters. It also creates a locked-down service account and an IP-hash salt in Secret Manager, deploys to Cloud Run (max 3 instances), and adds a $50 budget alert. At the end it prints your **API URL**.
 
-Then set a hard spend cap. Budgets only send emails; spend caps actually pause services. In the console, go to **Billing → Budgets & alerts → Create budget → Spend cap**. Cover the Gemini API, Agent Platform and Cloud Run in the BidVerdict project, at about $25 a month to start.
+Then set a hard spend cap. Budgets only send emails; spend caps actually pause services. In the console, go to **Billing → Budgets & alerts → Create budget → Spend cap**. Cover the Gemini API, Agent Platform and Cloud Run in the GovVerdict project, at about $25 a month to start.
 
 Check that it works end to end. This makes one real Gemini call on a live SAM.gov notice:
 
@@ -55,10 +55,10 @@ Open `https://YOUR-API-URL/privacy` and read it. That page is the privacy policy
 ./scripts/package-extension.sh https://YOUR-API-URL
 ```
 
-This writes `dist/extension/` (your API URL baked in) and `dist/bidverdict-1.0.0.zip`.
+This writes `dist/extension/` (your API URL baked in) and `dist/govverdict-1.1.0.zip`.
 
 1. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and choose `bidverdict/dist/extension`.
-2. Pin BidVerdict, open any active solicitation on [sam.gov](https://sam.gov/search/?index=opp), and click the icon.
+2. Pin GovVerdict, open any active solicitation on [sam.gov](https://sam.gov/search/?index=opp), and click the icon.
 3. Fill in the **Profile** tab with real NAICS codes and certifications, then **Analyze** two or three notices. Read the verdicts critically. This is the product.
 
 ## 4. Chrome Web Store developer account (10 min)
@@ -71,7 +71,7 @@ New publishers can have at most two published items. That's fine here.
 
 ## 5. Create the listing (20–30 min)
 
-In the dashboard, click **Add new item** and upload `dist/bidverdict-1.0.0.zip`. Then fill in each tab, copying from **`store/listing.md`**:
+In the dashboard, click **Add new item** and upload `dist/govverdict-1.1.0.zip`. Then fill in each tab, copying from **`store/listing.md`**:
 
 - **Store listing:** description, category (Productivity → Workflow & Planning), language, the icon, 5 screenshots and the small promo tile, plus homepage and support URLs. All files are in `store/`.
 - **Privacy:** single purpose, one justification per permission, "No remote code", data usage ("Website content"), the three certifications, and the privacy policy URL.
@@ -117,7 +117,7 @@ The extension doesn't change. Once the server has Paddle settings, the Upgrade b
 **Before you apply.** Paddle reviews your website. It must show the product, the price, terms, a refund policy and a privacy policy, all with your legal name. The server already serves `/`, `/terms`, `/refunds` and `/privacy`. Set your legal name on them by redeploying with `OPERATOR_NAME="Your Legal Name"`.
 
 **1. Build it in the sandbox first** at [sandbox-vendors.paddle.com](https://sandbox-vendors.paddle.com):
-1. **Catalog → Products:** create *BidVerdict Pro* with a price of $14, billed monthly. Copy the price ID (`pri_…`).
+1. **Catalog → Products:** create *GovVerdict Pro* with a price of $14, billed monthly. Copy the price ID (`pri_…`).
 2. **Developer tools → Authentication:** create an API key (`pdl_sdbx_apikey_…`) and a client-side token (`test_…`).
 3. **Developer tools → Notifications → New destination:**
    - URL: `https://YOUR-API-URL/paddle/webhook`

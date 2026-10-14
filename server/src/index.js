@@ -52,7 +52,13 @@ export function createApp({store = makeStore(), paddle = makePaddle()} = {}) {
   });
 
   app.use('/assets', express.static(new URL('../public', import.meta.url).pathname, {maxAge: '1d', fallthrough: false}));
-  app.get('/', (req, res) => res.type('html').send(landingPage()));
+  const baseUrl = req => process.env.PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
+  app.get('/', (req, res) => res.type('html').send(landingPage(baseUrl(req))));
+  app.get('/robots.txt', (req, res) => res.type('text/plain').send(`User-agent: *\nAllow: /\nDisallow: /checkout\nDisallow: /thanks\nDisallow: /v1/\n\nSitemap: ${baseUrl(req)}/sitemap.xml\n`));
+  app.get('/sitemap.xml', (req, res) => {
+    const urls = ['/', '/privacy', '/terms', '/refunds', '/support'].map(p => `<url><loc>${baseUrl(req)}${p}</loc></url>`).join('');
+    res.type('application/xml').send(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`);
+  });
   app.get('/privacy', (req, res) => res.type('html').send(privacyPage()));
   app.get('/support', (req, res) => res.type('html').send(supportPage()));
   app.get('/health', (req, res) => res.json({ok: true, store: store.kind, mock: process.env.MOCK_AI === '1'}));
@@ -61,7 +67,7 @@ export function createApp({store = makeStore(), paddle = makePaddle()} = {}) {
   app.get('/checkout', (req, res) => {
     const installId = String(req.query.installId || '');
     if (!paddle) return res.status(404).type('html').send(thanksPage({error: 'Pro isn’t available yet.'}));
-    if (!UUID.test(installId)) return res.status(400).type('html').send(thanksPage({error: 'Open checkout from the Account tab in the BidVerdict extension.'}));
+    if (!UUID.test(installId)) return res.status(400).type('html').send(thanksPage({error: 'Open checkout from the Account tab in the GovVerdict extension.'}));
     res.type('html').send(checkoutPage({installId: installId.toLowerCase(), clientToken: paddle.clientToken, priceId: paddle.priceId, sandbox: paddle.mode === 'sandbox'}));
   });
   app.get('/thanks', async (req, res) => {
@@ -81,7 +87,7 @@ export function createApp({store = makeStore(), paddle = makePaddle()} = {}) {
     const origin = req.get('origin') || '';
     const m = origin.match(/^chrome-extension:\/\/([a-p]{32})$/);
     const ok = devAnyOrigin || (m && (!allowed.length || allowed.includes(m[1])));
-    if (!ok) return res.status(403).json({error: 'forbidden', message: 'This API only serves the BidVerdict extension.'});
+    if (!ok) return res.status(403).json({error: 'forbidden', message: 'This API only serves the GovVerdict extension.'});
     if (origin) { res.set('Access-Control-Allow-Origin', origin); res.set('Vary', 'Origin'); }
     res.set('Access-Control-Allow-Headers', 'content-type');
     res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -90,7 +96,6 @@ export function createApp({store = makeStore(), paddle = makePaddle()} = {}) {
   });
   app.use('/v1', express.json({limit: '20mb'}));
 
-  const baseUrl = req => process.env.PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
   async function account(installId, base) {
     const plan = await planFor(store, installId);
     const usage = await store.get('usage', `in_${installId}_${day()}`);
@@ -113,8 +118,8 @@ export function createApp({store = makeStore(), paddle = makePaddle()} = {}) {
 
   app.post('/v1/license', async (req, res) => {
     const {installId, key} = req.body || {};
-    if (!UUID.test(String(installId)) || !/^BV(-[A-Z0-9]{4}){4}$/.test(String(key || '').trim().toUpperCase())) {
-      return res.status(400).json({error: 'bad_request', message: 'That doesn’t look like a BidVerdict licence key.'});
+    if (!UUID.test(String(installId)) || !/^[GB]V(-[A-Z0-9]{4}){4}$/.test(String(key || '').trim().toUpperCase())) {
+      return res.status(400).json({error: 'bad_request', message: 'That doesn’t look like a GovVerdict licence key.'});
     }
     const r = await activateLicense(store, installId, String(key).trim().toUpperCase());
     if (!r.ok) return res.status(400).json({error: 'license', message: r.error});
@@ -186,5 +191,5 @@ export function createApp({store = makeStore(), paddle = makePaddle()} = {}) {
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const port = Number(process.env.PORT || 8080);
-  createApp().listen(port, () => console.log(`BidVerdict API on :${port} (store=${process.env.STORE || 'firestore'}, mock=${process.env.MOCK_AI === '1'})`));
+  createApp().listen(port, () => console.log(`GovVerdict API on :${port} (store=${process.env.STORE || 'firestore'}, mock=${process.env.MOCK_AI === '1'})`));
 }

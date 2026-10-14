@@ -1,6 +1,6 @@
 // Fills shot.html from ?n=1..5 so each screenshot is one URL.
 const SHOTS = {
-  1: {h: 'Bid or no-bid, in about a minute.', p: 'Open any contract opportunity on SAM.gov. BidVerdict reads the notice and its attachments and checks them against your company.',
+  1: {h: 'Bid or no-bid, in about a minute.', p: 'Open any contract opportunity on SAM.gov. GovVerdict reads the notice and its attachments and checks them against your company.',
       li: ['A clear verdict with a fit score', 'Set-aside, NAICS, deadline and location checked against SAM.gov data', 'Reasons you can act on'],
       src: 'notice=sample&profile=filled&api=mock&auto=1&reset=1'},
   2: {h: 'Know exactly what the offer needs.', p: 'A compliance checklist pulled from the solicitation, the statement of work and the latest amendments.',

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "BidVerdict: Federal Bid/No-Bid",
-  "short_name": "BidVerdict",
-  "version": "1.0.0",
+  "name": "GovVerdict: Bid/No-Bid for SAM.gov Contracts",
+  "short_name": "GovVerdict",
+  "version": "1.1.0",
   "description": "Bid or no-bid on any SAM.gov contract opportunity in about a minute. Reads the notice and attachments and checks your fit.",
   "minimum_chrome_version": "116",
   "icons": {
@@ -12,7 +12,7 @@
     "128": "icons/icon128.png"
   },
   "action": {
-    "default_title": "Open BidVerdict",
+    "default_title": "Open GovVerdict",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png"
@@ -25,7 +25,10 @@
     "service_worker": "background.js",
     "type": "module"
   },
-  "permissions": ["sidePanel", "storage"],
+  "permissions": [
+    "sidePanel",
+    "storage"
+  ],
   "host_permissions": [
     "https://sam.gov/*",
     "https://iae-fbo-attachments.s3.amazonaws.com/*"

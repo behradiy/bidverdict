@@ -1,4 +1,4 @@
-"""Checks a deployed BidVerdict API end to end, including a real Gemini call.
+"""Checks a deployed GovVerdict API end to end, including a real Gemini call.
 
 Usage:
   python3 scripts/smoke_test.py https://bidverdict-api-xxxx.a.run.app [NOTICE_ID] [EXTENSION_ID]
@@ -16,7 +16,7 @@ API = sys.argv[1].rstrip("/")
 NOTICE = sys.argv[2] if len(sys.argv) > 2 else None
 EXT = sys.argv[3] if len(sys.argv) > 3 else "abcdefghijklmnopabcdefghijklmnop"
 ORIGIN = f"chrome-extension://{EXT}"
-UA = {"User-Agent": "bidverdict-smoke-test"}
+UA = {"User-Agent": "govverdict-smoke-test"}
 
 
 def get(url, headers=None):

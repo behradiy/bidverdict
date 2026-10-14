@@ -5,7 +5,7 @@
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const f1 = $('f1'), f2 = $('f2'), cursor = $('cursor'), ring = $('ring');
   const SCENES = [
-    ['Step 1', 'Open any contract opportunity.', 'BidVerdict picks up the SAM.gov notice and pre-selects the documents worth reading.'],
+    ['Step 1', 'Open any contract opportunity.', 'GovVerdict picks up the SAM.gov notice and pre-selects the documents worth reading.'],
     ['Step 2', 'One click to analyze.', 'It reads the solicitation, the work statement and the latest amendments.'],
     ['Step 3', 'A clear verdict, with reasons.', 'Eligibility, NAICS, deadline and location are checked against SAM.gov data.'],
     ['Step 4', 'Know what the offer needs.', 'A checklist from the documents, with the source of every item.'],

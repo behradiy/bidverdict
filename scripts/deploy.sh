@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Deploys the BidVerdict API to Cloud Run in its own Google Cloud project.
+# Deploys the GovVerdict API to Cloud Run in its own Google Cloud project.
 #
 # Required:
-#   PROJECT_ID      a NEW project used only for BidVerdict
+#   PROJECT_ID      a NEW project used only for GovVerdict
 #   SUPPORT_EMAIL   shown on the privacy policy and landing page
 # Optional:
 #   CREATE_PROJECT=1        create PROJECT_ID first
@@ -23,19 +23,19 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-: "${PROJECT_ID:?Set PROJECT_ID to a new project just for BidVerdict}"
+: "${PROJECT_ID:?Set PROJECT_ID to a new project just for GovVerdict}"
 : "${SUPPORT_EMAIL:?Set SUPPORT_EMAIL (it appears on the privacy policy)}"
 REGION="${REGION:-us-central1}"
 SERVICE="bidverdict-api"
 SA="bidverdict-api@${PROJECT_ID}.iam.gserviceaccount.com"
 G=(gcloud --project="$PROJECT_ID" --quiet)
 
-echo "About to deploy BidVerdict into project: $PROJECT_ID (region $REGION)"
+echo "About to deploy GovVerdict into project: $PROJECT_ID (region $REGION)"
 echo "Use a project that holds nothing else. Press Enter to continue or Ctrl+C to stop."
 [[ "${YES:-0}" == 1 ]] || read -r _
 
 if [[ "${CREATE_PROJECT:-0}" == 1 ]]; then
-  gcloud projects create "$PROJECT_ID" --name="BidVerdict"
+  gcloud projects create "$PROJECT_ID" --name="GovVerdict"
 fi
 if [[ -n "${BILLING_ACCOUNT:-}" ]]; then
   gcloud billing projects link "$PROJECT_ID" --billing-account="$BILLING_ACCOUNT"
@@ -58,7 +58,7 @@ fi
 
 echo "==> Service account"
 if ! "${G[@]}" iam service-accounts describe "$SA" >/dev/null 2>&1; then
-  "${G[@]}" iam service-accounts create bidverdict-api --display-name="BidVerdict API"
+  "${G[@]}" iam service-accounts create bidverdict-api --display-name="GovVerdict API"
 fi
 for role in roles/datastore.user roles/aiplatform.user roles/secretmanager.secretAccessor; do
   "${G[@]}" projects add-iam-policy-binding "$PROJECT_ID" --member="serviceAccount:$SA" --role="$role" --condition=None >/dev/null
@@ -76,7 +76,7 @@ fi
 
 # '##' delimiter so values may contain commas, spaces and @.
 ENVS="GOOGLE_CLOUD_PROJECT=$PROJECT_ID##GOOGLE_CLOUD_LOCATION=global##SUPPORT_EMAIL=$SUPPORT_EMAIL"
-ENVS+="##OPERATOR_NAME=${OPERATOR_NAME:-The BidVerdict team}##FREE_DAILY_LIMIT=${FREE_DAILY_LIMIT:-5}##PRO_DAILY_LIMIT=${PRO_DAILY_LIMIT:-60}"
+ENVS+="##OPERATOR_NAME=${OPERATOR_NAME:-The GovVerdict team}##FREE_DAILY_LIMIT=${FREE_DAILY_LIMIT:-5}##PRO_DAILY_LIMIT=${PRO_DAILY_LIMIT:-60}"
 ENVS+="##MODEL_FREE=${MODEL_FREE:-gemini-3.5-flash-lite}##MODEL_PRO=${MODEL_PRO:-gemini-3.8-flash}"
 for v in ALLOWED_EXTENSION_IDS CHROME_STORE_URL PADDLE_ENV PADDLE_CLIENT_TOKEN PADDLE_PRICE_ID PADDLE_PORTAL_URL PRO_PRICE_LABEL; do
   [[ -n "${!v:-}" ]] && ENVS+="##$v=${!v}"
@@ -91,7 +91,7 @@ URL=$("${G[@]}" run services describe "$SERVICE" --region "$REGION" --format='va
 
 if [[ -n "${BUDGET_USD:-}" && -n "${BILLING_ACCOUNT:-}" ]]; then
   echo "==> Budget alert at \$${BUDGET_USD}/month"
-  gcloud billing budgets create --billing-project="$PROJECT_ID" --billing-account="$BILLING_ACCOUNT" --display-name="BidVerdict" \
+  gcloud billing budgets create --billing-project="$PROJECT_ID" --billing-account="$BILLING_ACCOUNT" --display-name="GovVerdict" \
     --budget-amount="${BUDGET_USD}USD" --filter-projects="projects/$PROJECT_ID" \
     --threshold-rule=percent=0.5 --threshold-rule=percent=0.9 >/dev/null || echo "    (budget not created; add one in the console)"
 fi

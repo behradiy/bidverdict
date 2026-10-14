@@ -3,11 +3,11 @@
 Replace `https://YOUR-API-URL` with your Cloud Run URL before pasting.
 
 ## Package
-Upload `dist/bidverdict-1.0.0.zip` (built by `scripts/package-extension.sh`).
+Upload `dist/govverdict-1.1.0.zip` (built by `scripts/package-extension.sh`).
 
 ## Store listing tab
 
-**Name** (comes from the manifest): BidVerdict: Federal Bid/No-Bid
+**Name** (comes from the manifest): GovVerdict: Bid/No-Bid for SAM.gov Contracts
 
 **Summary** (from the manifest, 122 of 132 characters):
 Bid or no-bid on any SAM.gov contract opportunity in about a minute. Reads the notice and attachments and checks your fit.
@@ -15,9 +15,9 @@ Bid or no-bid on any SAM.gov contract opportunity in about a minute. Reads the n
 **Description:**
 
 ```
-BidVerdict tells small federal contractors whether an opportunity on SAM.gov is worth bidding, in about a minute.
+GovVerdict tells small federal contractors whether an opportunity on SAM.gov is worth bidding, in about a minute.
 
-Open any contract opportunity on SAM.gov and click the BidVerdict icon. The side panel reads the notice and its attachments (the solicitation, the statement of work and the latest amendments), checks them against your company profile, and gives you:
+Open any contract opportunity on SAM.gov and click the GovVerdict icon. The side panel reads the notice and its attachments (the solicitation, the statement of work and the latest amendments), checks them against your company profile, and gives you:
 
 • A verdict: Bid, Consider, No-bid, or Respond (for sources sought and presolicitations)
 • A fit score from 0 to 100, with the reasons
@@ -36,9 +36,9 @@ PRICING
 Free: 5 analyses a day. No account needed.
 
 PRIVACY
-BidVerdict only runs on sam.gov. When you click Analyze, the notice, the attachments you chose and your profile are sent to our server to be analysed with Google's Gemini models. They are not stored afterwards. Full policy: https://YOUR-API-URL/privacy
+GovVerdict only runs on sam.gov. When you click Analyze, the notice, the attachments you chose and your profile are sent to our server to be analysed with Google's Gemini models. They are not stored afterwards. Full policy: https://YOUR-API-URL/privacy
 
-BidVerdict is an independent tool and is not affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency. It gives decision support, not legal or contracting advice. Always confirm requirements in the solicitation itself.
+GovVerdict is an independent tool and is not affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency. It gives decision support, not legal or contracting advice. Always confirm requirements in the solicitation itself.
 ```
 
 When you switch on Pro, add this line under PRICING (the policy requires paid features to be disclosed):
@@ -62,7 +62,7 @@ When you switch on Pro, add this line under PRICING (the policy requires paid fe
 
 **Single purpose:**
 ```
-BidVerdict helps small businesses decide whether to bid on a U.S. federal contract opportunity they are viewing on SAM.gov, by analysing that notice and its attachments against the company profile the user enters.
+GovVerdict helps small businesses decide whether to bid on a U.S. federal contract opportunity they are viewing on SAM.gov, by analysing that notice and its attachments against the company profile the user enters.
 ```
 
 **Permission justifications:**
@@ -94,7 +94,7 @@ Then tick all three certifications:
 No login or payment is needed. The free tier allows 5 analyses per day.
 
 1. Open https://sam.gov/search/?index=opp and click any active "Solicitation" or "Combined Synopsis/Solicitation".
-2. Click the BidVerdict toolbar icon. The side panel opens and shows the notice with its attachments.
+2. Click the GovVerdict toolbar icon. The side panel opens and shows the notice with its attachments.
 3. Optional: in the Profile tab, enter NAICS 561720, tick "Small business" and click Save profile.
 4. In the Analyze tab, click "Analyze notice". The result appears in 20 to 60 seconds.
 

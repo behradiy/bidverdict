@@ -98,11 +98,23 @@ test('landing page has the video, screenshots and store copy; assets are served'
   assert.equal((await fetch(base + '/assets/nope.png')).status, 404);
 });
 
+test('robots, sitemap and absolute social tags', async () => {
+  const robots = await (await fetch(base + '/robots.txt')).text();
+  assert.match(robots, /Disallow: \/v1\//);
+  assert.match(robots, new RegExp(`Sitemap: ${base}/sitemap.xml`));
+  const r = await fetch(base + '/sitemap.xml');
+  assert.match(r.headers.get('content-type'), /xml/);
+  assert.match(await r.text(), new RegExp(`<loc>${base}/privacy</loc>`));
+  const html = await (await fetch(base + '/')).text();
+  assert.match(html, new RegExp(`<link rel="canonical" href="${base}/">`));
+  assert.match(html, new RegExp(`og:image" content="${base}/assets/img/og.jpg"`));
+});
+
 test('public pages render', async () => {
   for (const p of ['/', '/privacy', '/support', '/terms', '/refunds']) {
     const r = await fetch(base + p);
     assert.equal(r.status, 200);
-    assert.match(await r.text(), /BidVerdict/);
+    assert.match(await r.text(), /GovVerdict/);
     if (p === "/privacy") for (const cat of ["Website content", "Location", "Personally identifiable information", "Financial and payment information", "Limited Use"]) assert.ok((await (await fetch(base + p)).text()).includes(cat), cat);
   }
   assert.equal((await fetch(base + '/thanks?txn=bad')).status, 400);

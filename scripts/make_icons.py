@@ -1,4 +1,4 @@
-"""Draws the BidVerdict icon set (navy tile, white check, green badge) with PIL.
+"""Draws the GovVerdict icon set (navy tile, white check, green badge) with PIL.
 Usage: python3 scripts/make_icons.py   (writes extension/icons/*.png and store/icon128.png)
 """
 from pathlib import Path

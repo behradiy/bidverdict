@@ -1,4 +1,4 @@
-# BidVerdict
+# GovVerdict
 
 A Chrome extension that tells small federal contractors whether to bid on a SAM.gov contract opportunity. Open a notice on SAM.gov and the side panel does the rest:
 
@@ -8,6 +8,8 @@ A Chrome extension that tells small federal contractors whether to bid on a SAM.
 4. forces **No-bid** whenever a rule fails, whatever the model says.
 
 To publish, follow **[PUBLISHING.md](PUBLISHING.md)**.
+
+GovVerdict was called BidVerdict until 14 Oct 2026. Some technical names keep the old name on purpose, because changing them would break the published extension: the folder, the Cloud Run service `bidverdict-api` and its URL, the Google Cloud project and the `bv-*` secrets.
 
 ## How it fits together
 
@@ -37,6 +39,6 @@ The landing page (`server/src/landing.js`) shows the demo video and the Chrome W
 
 ## Tests
 
-- `npm --prefix server test`: 23 tests covering the rules, quotas, licences, Paddle webhooks and signatures, the CORS guard, the API, and DOCX/PDF handling with real SAM.gov files.
+- `npm --prefix server test`: 25 tests covering the rules, quotas, licences, Paddle webhooks and signatures, the CORS guard, the API, and DOCX/PDF handling with real SAM.gov files.
 - `test/harness/`: runs the real side panel in a normal tab with mocked `chrome.*` and SAM.gov fixtures.
 - Also checked before shipping: the unpacked extension was loaded into a real Chrome. It pulled a live SAM.gov notice, downloaded its 4 selected attachments through the S3 redirect, and got an analysis back from the API from the extension origin.

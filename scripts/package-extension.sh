@@ -12,7 +12,7 @@ if [[ ! "$API" =~ ^https://[A-Za-z0-9.-]+$ ]]; then
 fi
 
 VERSION=$(python3 -c "import json; print(json.load(open('extension/manifest.json'))['version'])")
-OUT="dist/bidverdict-$VERSION.zip"
+OUT="dist/govverdict-$VERSION.zip"
 rm -rf dist/extension "$OUT"
 mkdir -p dist
 cp -r extension dist/extension

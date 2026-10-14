@@ -83,7 +83,7 @@ test('completed checkout turns Pro on in the buying browser; renewal reuses the 
 
 test('thanks page shows the same key; a second browser can activate it', async () => {
   const html = await (await fetch(`${base}/thanks?txn=txn_first`)).text();
-  const key = html.match(/BV(-[A-Z0-9]{4}){4}/)[0];
+  const key = html.match(/GV(-[A-Z0-9]{4}){4}/)[0];
   const lic = [...store._dump().entries()].find(([k]) => k === `licenses/${key}`);
   assert.ok(lic, 'thanks page key matches the webhook licence');
   const other = '99999999-8888-4777-8666-555555555555';

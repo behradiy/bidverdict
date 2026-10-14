@@ -3,7 +3,7 @@
 import {cfg, esc} from './pages.js';
 
 const FEATURES = [
-  {n: 1, h: 'Bid or no-bid, in about a minute.', p: 'Open any contract opportunity on SAM.gov. BidVerdict reads the notice and its attachments and checks them against your company.',
+  {n: 1, h: 'Bid or no-bid, in about a minute.', p: 'Open any contract opportunity on SAM.gov. GovVerdict reads the notice and its attachments and checks them against your company.',
     li: ['A clear verdict with a fit score', 'Set-aside, NAICS, deadline and location checked against SAM.gov data', 'Reasons you can act on']},
   {n: 2, h: 'Know exactly what the offer needs.', p: 'A compliance checklist pulled from the solicitation, the statement of work and the latest amendments.',
     li: ['Forms, page limits, references, pricing sheets', 'How offers will be judged', 'Questions to send the contracting officer']},
@@ -30,7 +30,7 @@ const FAQ = [
   ['Which attachments can it read?', 'PDF and Word files up to 7 MB each and 12 MB in total. Spreadsheets aren’t read yet; paste the part you need into “Add text from elsewhere”.'],
   ['Is my company profile uploaded?', 'It’s stored in your Chrome profile and sent with each analysis, then discarded. We don’t keep it on our servers.'],
   ['Can I trust the verdict?', 'Eligibility rules (set-aside, deadline, sole source) are checked deterministically and always win. The rest is AI analysis of the documents, so treat it as decision support and confirm in the solicitation.'],
-  ['Is this an official government tool?', 'No. BidVerdict is independent and isn’t affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency.']
+  ['Is this an official government tool?', 'No. GovVerdict is independent and isn’t affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency.']
 ];
 
 const CSS = `
@@ -101,24 +101,25 @@ summary{cursor:pointer;font-weight:650}details p{margin:10px 0 0;color:var(--mut
 footer{padding-block:36px 56px;color:var(--muted);font-size:14px}footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
 footer nav{display:flex;flex-wrap:wrap;gap:16px}footer nav a{color:var(--muted)}footer p{flex-basis:100%;margin:6px 0 0;max-width:90ch}`;
 
-export function landingPage() {
+export function landingPage(base = '') {
   const c = cfg();
   const store = c.store;
   const cta = store
     ? `<a class="btn primary" href="${esc(store)}">Add to Chrome, it’s free</a>`
     : `<span class="btn pending" aria-disabled="true">In review on the Chrome Web Store</span>`;
   const smallCta = store ? `<a class="btn primary" href="${esc(store)}">Add to Chrome</a>` : `<a class="btn primary" href="#pricing">Free during launch</a>`;
-  const title = 'BidVerdict: bid or no-bid on SAM.gov opportunities';
+  const title = 'GovVerdict: bid or no-bid on SAM.gov opportunities';
   const desc = 'A Chrome extension that reads SAM.gov contract opportunities and their attachments, checks your eligibility and fit, and gives a clear bid/no-bid verdict in about a minute.';
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}">
-<meta property="og:image" content="/assets/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="${esc(base)}/"><meta property="og:url" content="${esc(base)}/">
+<meta property="og:image" content="${esc(base)}/assets/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="/assets/img/icon32.png">
 <style>${CSS}</style></head><body>
 <nav class="top" aria-label="Main"><div class="wrap">
-  <a class="logo" href="/"><img src="/assets/img/icon128.png" alt="">BidVerdict</a>
+  <a class="logo" href="/"><img src="/assets/img/icon128.png" alt="">GovVerdict</a>
   <div class="links"><a href="#how">How it works</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
   ${smallCta}
 </div></nav>
@@ -126,11 +127,11 @@ export function landingPage() {
 <header class="hero wrap">
   <span class="eyebrow">Chrome extension for small federal contractors</span>
   <h1>Bid or no-bid, in about a minute.</h1>
-  <p class="lede">Open any contract opportunity on SAM.gov. BidVerdict reads the notice and its attachments, checks them against your company profile, and gives you a clear verdict with the reasons.</p>
+  <p class="lede">Open any contract opportunity on SAM.gov. GovVerdict reads the notice and its attachments, checks them against your company profile, and gives you a clear verdict with the reasons.</p>
   <div class="cta">${cta}<a class="btn ghost" href="#how">See how it works</a></div>
   <div class="trust"><span>${esc(c.freeLimit)} free analyses a day</span><span>No account needed</span><span>Reads PDFs and Word files</span></div>
   <div class="video">
-    <video id="demo" autoplay muted loop playsinline preload="metadata" poster="/assets/media/demo-poster.jpg" aria-label="Demo: BidVerdict analysing a SAM.gov notice, showing a Bid verdict, the offer checklist, and a No-bid for an ineligible set-aside">
+    <video id="demo" autoplay muted loop playsinline preload="metadata" poster="/assets/media/demo-poster.jpg" aria-label="Demo: GovVerdict analysing a SAM.gov notice, showing a Bid verdict, the offer checklist, and a No-bid for an ineligible set-aside">
       <source src="/assets/media/demo.webm" type="video/webm">
       <source src="/assets/media/demo.mp4" type="video/mp4">
     </video>
@@ -152,7 +153,7 @@ export function landingPage() {
   <div class="head"><span class="eyebrow">How it works</span><h2 id="how-h">Three steps, about a minute</h2></div>
   <div class="steps">
     <div class="step"><h3>Set up your company once</h3><p>NAICS codes, certifications, the states you work in, capabilities and past performance. Stored in your Chrome profile.</p></div>
-    <div class="step"><h3>Open a SAM.gov opportunity</h3><p>BidVerdict picks up the notice in the side panel and pre-selects the attachments worth reading.</p></div>
+    <div class="step"><h3>Open a SAM.gov opportunity</h3><p>GovVerdict picks up the notice in the side panel and pre-selects the attachments worth reading.</p></div>
     <div class="step"><h3>Click Analyze</h3><p>Get the verdict, a fit score, the offer checklist, red flags and questions for the contracting officer.</p></div>
   </div>
 </section>
@@ -162,7 +163,7 @@ export function landingPage() {
   <div>${FEATURES.map(f => `
     <article class="feature">
       <div class="copy"><h3>${esc(f.h)}</h3><p>${esc(f.p)}</p><ul>${f.li.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
-      <div class="shot"><img src="/assets/img/screenshot-${f.n}.webp" srcset="/assets/img/screenshot-${f.n}-640.webp 640w, /assets/img/screenshot-${f.n}.webp 1280w" sizes="(max-width: 860px) 100vw, 640px" width="1280" height="800" loading="lazy" alt="${esc(f.h)} BidVerdict side panel screenshot"></div>
+      <div class="shot"><img src="/assets/img/screenshot-${f.n}.webp" srcset="/assets/img/screenshot-${f.n}-640.webp 640w, /assets/img/screenshot-${f.n}.webp 1280w" sizes="(max-width: 860px) 100vw, 640px" width="1280" height="800" loading="lazy" alt="${esc(f.h)} GovVerdict side panel screenshot"></div>
     </article>`).join('')}
   </div>
 </section>
@@ -184,7 +185,7 @@ export function landingPage() {
 </section>
 
 <section class="band wrap" aria-labelledby="privacy-h" style="padding-top:0">
-  <div class="head"><span class="eyebrow">Privacy</span><h2 id="privacy-h">Only what the analysis needs</h2><p>BidVerdict only runs on sam.gov. Here is everything we collect; the <a href="/privacy">privacy policy</a> has the details.</p></div>
+  <div class="head"><span class="eyebrow">Privacy</span><h2 id="privacy-h">Only what the analysis needs</h2><p>GovVerdict only runs on sam.gov. Here is everything we collect; the <a href="/privacy">privacy policy</a> has the details.</p></div>
   <div class="privacy">
     <div class="item"><b>Website content</b><span>The notice and attachments you analyse. Not stored after the analysis.</span></div>
     <div class="item"><b>Location</b><span>A one-way hash of your IP address for the daily limit. Deleted after about 3 days.</span></div>
@@ -200,14 +201,14 @@ export function landingPage() {
 </section>
 
 <section class="wrap" style="padding-bottom:24px">
-  <div class="final"><h2>Stop reading solicitations you can’t win.</h2><p>Let BidVerdict read the notice and attachments first, and spend your time on the bids worth writing.</p>
+  <div class="final"><h2>Stop reading solicitations you can’t win.</h2><p>Let GovVerdict read the notice and attachments first, and spend your time on the bids worth writing.</p>
   ${store ? `<a class="btn" href="${esc(store)}">Add to Chrome, it’s free</a>` : `<span class="btn" aria-disabled="true">Coming soon to the Chrome Web Store</span>`}</div>
 </section>
 
 <footer><div class="wrap">
-  <a class="logo" href="/"><img src="/assets/img/icon128.png" alt="" style="width:24px;height:24px">BidVerdict</a>
+  <a class="logo" href="/"><img src="/assets/img/icon128.png" alt="" style="width:24px;height:24px">GovVerdict</a>
   <nav aria-label="Legal"><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/refunds">Refunds</a><a href="/support">Support</a></nav>
-  <p>BidVerdict is an independent tool, not affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency. It gives decision support, not legal or contracting advice. Always confirm requirements in the solicitation itself.</p>
+  <p>GovVerdict is an independent tool, not affiliated with or endorsed by GSA, SAM.gov or any U.S. government agency. It gives decision support, not legal or contracting advice. Always confirm requirements in the solicitation itself.</p>
 </div></footer>
 <script>
 (function () {

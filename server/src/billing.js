@@ -10,7 +10,7 @@ export function newLicenseKey() {
   const bytes = crypto.randomBytes(16);
   let s = '';
   for (let i = 0; i < 16; i++) s += KEY_ALPHABET[bytes[i] % KEY_ALPHABET.length];
-  return `BV-${s.slice(0, 4)}-${s.slice(4, 8)}-${s.slice(8, 12)}-${s.slice(12, 16)}`;
+  return `GV-${s.slice(0, 4)}-${s.slice(4, 8)}-${s.slice(8, 12)}-${s.slice(12, 16)}`;
 }
 
 export function licenseIsActive(lic) {
