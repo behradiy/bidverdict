@@ -108,6 +108,22 @@ To keep testing your unpacked copy as well, add its ID from `chrome://extensions
 
 ---
 
+## Optional: your own domain (about 1 hour, mostly waiting)
+
+The extension keeps calling the run.app URL; the domain is for people. A `.com` costs about $11 a year at Cloudflare Registrar.
+
+1. Verify the domain in [Google Search Console](https://search.google.com/search-console) (**Add property → Domain**) with the Google account that owns the project.
+2. Map it to the service, for the bare domain and for `www`:
+   ```bash
+   gcloud beta run domain-mappings create --service=bidverdict-api --domain=yourdomain.com --region=us-central1 --project=bidverdict-yourname
+   ```
+   ```bash
+   gcloud beta run domain-mappings create --service=bidverdict-api --domain=www.yourdomain.com --region=us-central1 --project=bidverdict-yourname
+   ```
+3. Add the records those commands print (4 A, 4 AAAA, and a `www` CNAME to `ghs.googlehosted.com`) at your DNS host. On Cloudflare, set every one to **DNS only** (grey cloud), or Google can't issue the certificate.
+4. Wait for HTTPS to work on both names (15 minutes to a few hours), then redeploy with `PUBLIC_URL=https://yourdomain.com` added. Web pages on the run.app URL and on `www` then redirect to the domain.
+5. In the store dashboard, point the homepage, support and privacy policy URLs at the domain, and pick it as the **Official URL**.
+
 ## Optional: switch on Pro ($14/month) with Paddle
 
 Paddle is the merchant of record: it sells Pro to the customer, collects payment, handles sales tax and VAT, and pays you out. Stripe isn't available in Oman; Paddle onboards sellers from most countries, but confirm Oman during signup. Fee: 5% + $0.50 per payment (about $1.20 on $14).

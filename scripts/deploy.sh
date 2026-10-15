@@ -12,6 +12,8 @@
 #   REGION                  default us-central1
 #   ALLOWED_EXTENSION_IDS   your Chrome Web Store item ID, once you have it
 #   CHROME_STORE_URL        your listing URL, once published
+#   PUBLIC_URL              your custom domain (e.g. https://yourdomain.com), once it serves HTTPS;
+#                           web pages on other hosts then redirect there (the API does not)
 #   PADDLE_ENV (sandbox|production), PADDLE_CLIENT_TOKEN, PADDLE_PRICE_ID, PADDLE_PORTAL_URL, PRO_PRICE_LABEL
 #     to switch on Pro (the API key and webhook secret go in Secret Manager as
 #     bv-paddle-api-key and bv-paddle-webhook-secret)
@@ -78,7 +80,7 @@ fi
 ENVS="GOOGLE_CLOUD_PROJECT=$PROJECT_ID##GOOGLE_CLOUD_LOCATION=global##SUPPORT_EMAIL=$SUPPORT_EMAIL"
 ENVS+="##OPERATOR_NAME=${OPERATOR_NAME:-The GovVerdict team}##FREE_DAILY_LIMIT=${FREE_DAILY_LIMIT:-5}##PRO_DAILY_LIMIT=${PRO_DAILY_LIMIT:-60}"
 ENVS+="##MODEL_FREE=${MODEL_FREE:-gemini-3.5-flash-lite}##MODEL_PRO=${MODEL_PRO:-gemini-3.8-flash}"
-for v in ALLOWED_EXTENSION_IDS CHROME_STORE_URL PADDLE_ENV PADDLE_CLIENT_TOKEN PADDLE_PRICE_ID PADDLE_PORTAL_URL PRO_PRICE_LABEL; do
+for v in PUBLIC_URL ALLOWED_EXTENSION_IDS CHROME_STORE_URL PADDLE_ENV PADDLE_CLIENT_TOKEN PADDLE_PRICE_ID PADDLE_PORTAL_URL PRO_PRICE_LABEL; do
   [[ -n "${!v:-}" ]] && ENVS+="##$v=${!v}"
 done
 

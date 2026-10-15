@@ -1,5 +1,6 @@
 import {test, before, after} from 'node:test';
 import assert from 'node:assert/strict';
+import http from 'node:http';
 import {readFileSync} from 'node:fs';
 import {createApp} from '../src/index.js';
 import {makeStore} from '../src/store.js';
@@ -108,6 +109,28 @@ test('robots, sitemap and absolute social tags', async () => {
   const html = await (await fetch(base + '/')).text();
   assert.match(html, new RegExp(`<link rel="canonical" href="${base}/">`));
   assert.match(html, new RegExp(`og:image" content="${base}/assets/img/og.jpg"`));
+});
+
+test('with PUBLIC_URL set, pages on other hosts redirect there; the API does not', async () => {
+  process.env.PUBLIC_URL = 'https://govverdict.example';
+  const srv = createApp({store, paddle: fakePaddle}).listen(0);
+  await new Promise(r => srv.once('listening', r));
+  const b = `http://127.0.0.1:${srv.address().port}`;
+  try {
+    for (const p of ['/', '/privacy?x=1', '/robots.txt']) {
+      const r = await fetch(b + p, {redirect: 'manual'});
+      assert.equal(r.status, 301, p);
+      assert.equal(r.headers.get('location'), 'https://govverdict.example' + p);
+    }
+    assert.equal((await fetch(b + `/v1/me?installId=${INSTALL}`, {headers: {origin: ORIGIN}})).status, 200);
+    assert.equal((await fetch(b + '/assets/img/og.jpg')).status, 200);
+    assert.equal((await fetch(b + '/health')).status, 200);
+    const sameHost = await new Promise((resolve, reject) => http.get({port: srv.address().port, path: '/', headers: {host: 'govverdict.example'}}, r => { r.resume(); resolve(r.statusCode); }).on('error', reject));
+    assert.equal(sameHost, 200);
+  } finally {
+    delete process.env.PUBLIC_URL;
+    srv.close();
+  }
 });
 
 test('public pages render', async () => {

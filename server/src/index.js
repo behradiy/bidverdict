@@ -51,6 +51,18 @@ export function createApp({store = makeStore(), paddle = makePaddle()} = {}) {
     }
   });
 
+  // Once PUBLIC_URL is set (the custom domain), web pages opened on any other host (the run.app URL, www.)
+  // redirect there. The API, assets and webhooks stay reachable on every host so installed extensions keep working.
+  const publicUrl = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+  const publicHost = publicUrl ? new URL(publicUrl).host : '';
+  const PAGES = new Set(['/', '/privacy', '/support', '/terms', '/refunds', '/checkout', '/thanks', '/robots.txt', '/sitemap.xml']);
+  app.use((req, res, next) => {
+    if (publicHost && (req.method === 'GET' || req.method === 'HEAD') && PAGES.has(req.path) && req.get('host') !== publicHost) {
+      return res.redirect(301, publicUrl + req.originalUrl);
+    }
+    next();
+  });
+
   app.use('/assets', express.static(new URL('../public', import.meta.url).pathname, {maxAge: '1d', fallthrough: false}));
   const baseUrl = req => process.env.PUBLIC_URL || `${req.protocol}://${req.get('host')}`;
   app.get('/', (req, res) => res.type('html').send(landingPage(baseUrl(req))));
