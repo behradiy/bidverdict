@@ -122,7 +122,8 @@ The extension keeps calling the run.app URL; the domain is for people. A `.com` 
    ```
 3. Add the records those commands print (4 A, 4 AAAA, and a `www` CNAME to `ghs.googlehosted.com`) at your DNS host. On Cloudflare, set every one to **DNS only** (grey cloud), or Google can't issue the certificate.
 4. Wait for HTTPS to work on both names (15 minutes to a few hours), then redeploy with `PUBLIC_URL=https://yourdomain.com` added. Web pages on the run.app URL and on `www` then redirect to the domain.
-5. In the store dashboard, point the homepage, support and privacy policy URLs at the domain, and pick it as the **Official URL**.
+5. Rebuild the extension with the domain as a second argument, so the panel's privacy link uses it: `./scripts/package-extension.sh https://YOUR-API-URL https://yourdomain.com`. Set `homepage_url` in `extension/manifest.json` too.
+6. In the store dashboard, point the homepage, support and privacy policy URLs at the domain, and pick it as the **Official URL**.
 
 ## Optional: switch on Pro ($14/month) with Paddle
 

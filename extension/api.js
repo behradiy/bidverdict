@@ -1,4 +1,4 @@
-import {API_BASE} from './config.js';
+import {API_BASE, SITE_URL} from './config.js';
 
 export class ApiError extends Error {
   constructor(message, status, body) { super(message); this.status = status; this.body = body || {}; }
@@ -24,4 +24,4 @@ async function call(path, {method = 'GET', body, timeoutMs = 20000} = {}) {
 export const me = installId => call(`/v1/me?installId=${encodeURIComponent(installId)}`);
 export const activate = (installId, key) => call('/v1/license', {method: 'POST', body: {installId, key}});
 export const analyze = payload => call('/v1/analyze', {method: 'POST', body: payload, timeoutMs: 180000});
-export const privacyUrl = () => `${API_BASE}/privacy`;
+export const privacyUrl = () => `${SITE_URL}/privacy`;
